@@ -16,22 +16,15 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { signInAction } from './sign-in-action';
-
-const formSchema = z.object({
-	username: z.string().min(2, {
-		message: 'Username must be at least 2 characters.',
-	}),
-	password: z.string().min(6, {
-		message: 'Password must be at least 6 characters.',
-	}),
-});
+import { signInFormSchema } from './sign-in-schema';
+import { useActionState } from 'react';
 
 export default function SignInForm({
 	className,
 	...props
 }: React.ComponentProps<'div'>) {
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof signInFormSchema>>({
+		resolver: zodResolver(signInFormSchema),
 		defaultValues: {
 			username: '',
 			password: '',
@@ -49,11 +42,7 @@ export default function SignInForm({
 				</CardHeader>
 				<CardContent>
 					<Form {...form}>
-						<form
-							// onSubmit={form.handleSubmit(onSubmit)}
-							action={signInAction}
-							className='space-y-8'
-						>
+						<form className='space-y-8'>
 							<div className='grid gap-4'>
 								<FormField
 									control={form.control}
