@@ -7,34 +7,11 @@ import {
 	TableRow,
 } from '@/components/ui/table';
 import Link from 'next/link';
+import { db } from '@/lib/db';
+import { members } from '@/lib/db/schema';
 
-interface Member {
-	id: string;
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	phoneNumber: string;
-}
-
-// Sample data - replace with your actual data source
-const members: Member[] = [
-	{
-		id: '1',
-		firstName: 'John',
-		lastName: 'Doe',
-		dateOfBirth: '1990-05-15',
-		phoneNumber: '+1 (555) 123-4567',
-	},
-	{
-		id: '2',
-		firstName: 'Jane',
-		lastName: 'Smith',
-		dateOfBirth: '1985-12-08',
-		phoneNumber: '+1 (555) 987-6543',
-	},
-];
-
-export default function MembersPage() {
+export default async function MembersPage() {
+	const membersList = await db.select().from(members);
 	return (
 		<div className='container mx-auto p-6'>
 			<div className='flex justify-between items-center mb-6'>
@@ -56,14 +33,25 @@ export default function MembersPage() {
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{members.map((member) => (
-						<TableRow key={member.id}>
-							<TableCell>{member.firstName}</TableCell>
-							<TableCell>{member.lastName}</TableCell>
-							<TableCell>{member.dateOfBirth}</TableCell>
-							<TableCell>{member.phoneNumber}</TableCell>
+					{membersList.length === 0 ? (
+						<TableRow>
+							<TableCell
+								colSpan={4}
+								className='text-center py-8 text-muted-foreground'
+							>
+								No members found. Add your first member to get started.
+							</TableCell>
 						</TableRow>
-					))}
+					) : (
+						membersList.map((member) => (
+							<TableRow key={member.id}>
+								<TableCell>{member.firstName}</TableCell>
+								<TableCell>{member.lastName}</TableCell>
+								<TableCell>{member.dateOfBirth}</TableCell>
+								<TableCell>{member.phoneNumber}</TableCell>
+							</TableRow>
+						))
+					)}
 				</TableBody>
 			</Table>
 		</div>
