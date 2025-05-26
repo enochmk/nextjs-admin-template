@@ -15,9 +15,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
-import { signInAction } from './sign-in-action';
-import { signInFormSchema } from './sign-in-schema';
-import { useActionState } from 'react';
+import { signInFormSchema } from '../schema';
 
 export default function SignInForm({
 	className,
