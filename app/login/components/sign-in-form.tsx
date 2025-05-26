@@ -15,6 +15,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
+import { signInAction } from './sign-in-action';
 
 const formSchema = z.object({
 	username: z.string().min(2, {
@@ -37,10 +38,6 @@ export default function SignInForm({
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values);
-	}
-
 	return (
 		<div
 			className={cn('flex flex-col gap-6', className)}
@@ -53,7 +50,8 @@ export default function SignInForm({
 				<CardContent>
 					<Form {...form}>
 						<form
-							onSubmit={form.handleSubmit(onSubmit)}
+							// onSubmit={form.handleSubmit(onSubmit)}
+							action={signInAction}
 							className='space-y-8'
 						>
 							<div className='grid gap-4'>
