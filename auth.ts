@@ -6,7 +6,7 @@ import { DrizzleAdapter } from '@auth/drizzle-adapter';
 import { db } from '@/lib/db';
 import { accounts, sessions, users, verificationTokens } from '@/lib/db/schema';
 
-const loginSchema = z.object({
+const signInSchema = z.object({
 	email: z.string().email(),
 	password: z.string().min(6),
 });
@@ -32,7 +32,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			},
 			authorize: async (credentials) => {
 				try {
-					const { email, password } = loginSchema.parse(credentials);
+					const { email, password } = signInSchema.parse(credentials);
 
 					// Find user by email
 					const user = await db.query.users.findFirst({
@@ -62,7 +62,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		}),
 	],
 	pages: {
-		signIn: '/login',
+		signIn: '/sign-in',
 	},
 	session: {
 		strategy: 'jwt',

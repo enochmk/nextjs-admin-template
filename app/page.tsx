@@ -5,11 +5,11 @@ import { auth } from '@/auth';
 export default async function Home() {
 	const session = await auth();
 
-	// Redirect to dashboard if authenticated, otherwise to login
+	// Redirect to dashboard if authenticated, otherwise to sign-in
 	if (session) {
 		redirect('/dashboard');
 	} else {
-		redirect('/login');
+		redirect('/sign-in');
 	}
 
 	return (

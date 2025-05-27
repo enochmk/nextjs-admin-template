@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/auth';
-import SignInForm from '@/app/(auth)/login/components/sign-in-form';
+import SignInForm from '@/app/(auth)/sign-in/components/sign-in-form';
 
-export default async function LoginPage() {
+export default async function SignInPage() {
 	const session = await auth();
 
 	// Redirect if already authenticated

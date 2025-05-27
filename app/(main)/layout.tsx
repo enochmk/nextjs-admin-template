@@ -13,7 +13,7 @@ export default async function MainLayout({
 
 	// Redirect if not authenticated
 	if (!session) {
-		redirect('/login');
+		redirect('/sign-in');
 	}
 
 	return (

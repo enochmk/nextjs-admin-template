@@ -30,7 +30,7 @@ export function NavUser() {
 	const user = session.user;
 
 	const handleSignOut = () => {
-		signOut({ callbackUrl: '/login' });
+		signOut({ callbackUrl: '/sign-in' });
 	};
 
 	return (
