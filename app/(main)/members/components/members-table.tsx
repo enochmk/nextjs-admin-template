@@ -28,15 +28,18 @@ export default function MembersTable({ membersList }: Props) {
 					<TableRow>
 						<TableCell
 							colSpan={4}
-							className='text-center py-8 text-muted-foreground'
+							className='text-center py-12 text-muted-foreground'
 						>
-							No members found. Add your first member to get started.
+							<div className='flex flex-col items-center space-y-2'>
+								<p>No members found.</p>
+								<p className='text-sm'>Add your first member to get started.</p>
+							</div>
 						</TableCell>
 					</TableRow>
 				) : (
 					membersList.map((member) => (
 						<TableRow key={member.id}>
-							<TableCell>{member.firstName}</TableCell>
+							<TableCell className='font-medium'>{member.firstName}</TableCell>
 							<TableCell>{member.lastName}</TableCell>
 							<TableCell>{member.dateOfBirth}</TableCell>
 							<TableCell>{member.phoneNumber}</TableCell>
