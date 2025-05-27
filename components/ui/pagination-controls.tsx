@@ -81,7 +81,7 @@ export default function PaginationControls({
 	if (total === 0) return null;
 
 	return (
-		<div className='flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t'>
+		<div className='flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t'>
 			<div className='flex items-center gap-4 text-sm text-muted-foreground'>
 				<div>
 					Showing {startItem} to {endItem} of {total} results

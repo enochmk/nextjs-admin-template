@@ -41,8 +41,12 @@ export default async function MembersPage({ searchParams }: MembersPageProps) {
 					Add Member
 				</Link>
 			</div>
-			<div className='bg-white rounded-lg border shadow-sm'>
-				<MembersTable membersList={result.data} />
+			<div className='bg-card rounded-lg border shadow-sm'>
+				<MembersTable
+					membersList={result.data}
+					currentPage={result.pagination.page}
+					limit={result.pagination.limit}
+				/>
 				<PaginationControls
 					currentPage={result.pagination.page}
 					totalPages={result.pagination.totalPages}

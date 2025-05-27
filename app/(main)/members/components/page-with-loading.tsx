@@ -13,7 +13,7 @@ interface MembersPageProps {
 
 function MembersTableSkeleton() {
 	return (
-		<div className='bg-white rounded-lg border'>
+		<div className='bg-card rounded-lg border'>
 			<div className='p-4'>
 				<div className='space-y-4'>
 					<Skeleton className='h-10 w-full' />
@@ -57,8 +57,12 @@ async function MembersContent({ searchParams }: MembersPageProps) {
 	const result = await getMembersPaginated(paginationParams);
 
 	return (
-		<div className='bg-white rounded-lg border'>
-			<MembersTable membersList={result.data} />
+		<div className='bg-card rounded-lg border'>
+			<MembersTable
+				membersList={result.data}
+				currentPage={result.pagination.page}
+				limit={result.pagination.limit}
+			/>
 			<PaginationControls
 				currentPage={result.pagination.page}
 				totalPages={result.pagination.totalPages}
