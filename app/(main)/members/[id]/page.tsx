@@ -1,12 +1,13 @@
 import Link from 'next/link';
+import { eq } from 'drizzle-orm';
+import { notFound } from 'next/navigation';
 import { ArrowLeft, Edit, Trash2, Calendar, Phone, User } from 'lucide-react';
+
+import { db } from '@/lib/db';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { db } from '@/lib/db';
 import { members } from '@/lib/db/schema';
-import { eq } from 'drizzle-orm';
-import { notFound } from 'next/navigation';
 
 interface MemberPageProps {
 	params: Promise<{ id: string }>;
@@ -16,7 +17,8 @@ export default async function MemberPage({ params }: MemberPageProps) {
 	const { id } = await params;
 	const memberId = parseInt(id);
 
-	if (isNaN(memberId)) {
+	// Validate that the ID is a positive integer
+	if (isNaN(memberId) || memberId <= 0) {
 		notFound();
 	}
 
