@@ -1,9 +1,10 @@
 import NextAuth from 'next-auth';
+import { z } from 'zod';
 import Credentials from 'next-auth/providers/credentials';
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
+
 import { db } from '@/lib/db';
 import { accounts, sessions, users, verificationTokens } from '@/lib/db/schema';
-import { z } from 'zod';
 
 const loginSchema = z.object({
 	email: z.string().email(),
