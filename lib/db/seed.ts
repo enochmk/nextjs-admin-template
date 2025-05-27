@@ -10,10 +10,7 @@ import { membersData } from './seed-data';
 
 async function seed() {
 	console.log('Seeding database...');
-
-	// Insert sample members
 	await db.insert(members).values(membersData);
-
 	console.log('Database seeded successfully!');
 }
 
