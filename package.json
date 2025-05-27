@@ -1,5 +1,6 @@
 {
-  "name": "shadcn-dashboard",
+  "name": "nextjs-admin-template",
+  "author": "Enoch Klufio",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
