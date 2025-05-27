@@ -13,9 +13,9 @@ interface QuickActionsCardProps {
 
 export function QuickActionsCard({ memberData }: QuickActionsCardProps) {
 	return (
-		<Card className='border-0 shadow-lg bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm'>
-			<CardHeader className='pb-4'>
-				<CardTitle className='text-lg'>Quick Actions</CardTitle>
+		<Card className='bg-card border shadow-sm'>
+			<CardHeader>
+				<CardTitle>Quick Actions</CardTitle>
 			</CardHeader>
 			<CardContent className='space-y-3'>
 				<Link
@@ -24,7 +24,7 @@ export function QuickActionsCard({ memberData }: QuickActionsCardProps) {
 				>
 					<Button
 						variant='outline'
-						className='w-full justify-start bg-white/50 hover:bg-white'
+						className='w-full justify-start'
 					>
 						<Edit className='mr-3 h-4 w-4' />
 						Edit Member Details
@@ -32,7 +32,7 @@ export function QuickActionsCard({ memberData }: QuickActionsCardProps) {
 				</Link>
 				<Button
 					variant='outline'
-					className='w-full justify-start bg-white/50 hover:bg-white'
+					className='w-full justify-start'
 				>
 					<Mail className='mr-3 h-4 w-4' />
 					Send Message

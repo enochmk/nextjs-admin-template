@@ -6,6 +6,8 @@ import { members } from '@/lib/db/schema';
 import { MemberHeader } from './components/member-header';
 import { PersonalInformationCard } from './components/personal-information-card';
 import { AccountOverviewCard } from './components/account-overview-card';
+import { QuickActionsCard } from './components/quick-actions-card';
+// import { ActivityStatsCard } from './components/activity-stats-card';
 
 interface MemberPageProps {
 	params: Promise<{ id: string }>;
@@ -34,14 +36,16 @@ export default async function MemberPage({ params }: MemberPageProps) {
 	const memberData = member[0];
 
 	return (
-		<div className='min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 dark:from-gray-950 dark:to-gray-900'>
-			<div className='container mx-auto p-6 max-w-6xl'>
-				<MemberHeader memberData={memberData} />
-				<div className='grid gap-6 lg:grid-cols-3'>
-					<div className='lg:col-span-2 space-y-6'>
-						<PersonalInformationCard memberData={memberData} />
-					</div>
+		<div className='container mx-auto p-6 max-w-6xl'>
+			<MemberHeader memberData={memberData} />
+			<div className='grid gap-6 lg:grid-cols-3'>
+				<div className='lg:col-span-2 space-y-6'>
+					<PersonalInformationCard memberData={memberData} />
+					{/* <ActivityStatsCard memberData={memberData} /> */}
+				</div>
+				<div className='space-y-6'>
 					<AccountOverviewCard memberData={memberData} />
+					<QuickActionsCard memberData={memberData} />
 				</div>
 			</div>
 		</div>
