@@ -6,31 +6,13 @@ config({ path: resolve(process.cwd(), '.env.local') });
 
 import { db } from './index';
 import { members } from './schema';
+import { membersData } from './seed-data';
 
 async function seed() {
 	console.log('Seeding database...');
 
 	// Insert sample members
-	await db.insert(members).values([
-		{
-			firstName: 'John',
-			lastName: 'Doe',
-			dateOfBirth: '1990-05-15',
-			phoneNumber: '+1 (555) 123-4567',
-		},
-		{
-			firstName: 'Jane',
-			lastName: 'Smith',
-			dateOfBirth: '1985-12-08',
-			phoneNumber: '+1 (555) 987-6543',
-		},
-		{
-			firstName: 'Mike',
-			lastName: 'Johnson',
-			dateOfBirth: '1992-03-22',
-			phoneNumber: '+1 (555) 456-7890',
-		},
-	]);
+	await db.insert(members).values(membersData);
 
 	console.log('Database seeded successfully!');
 }
