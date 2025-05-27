@@ -3,7 +3,13 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { format } from 'date-fns';
-import { Search, X, Calendar as CalendarIcon, Filter, Loader2 } from 'lucide-react';
+import {
+	Search,
+	X,
+	Calendar as CalendarIcon,
+	Filter,
+	Loader2,
+} from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

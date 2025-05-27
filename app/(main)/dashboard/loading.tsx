@@ -36,14 +36,17 @@ export default function DashboardLoading() {
 						<Skeleton className='h-64 w-full' />
 					</CardContent>
 				</Card>
-				
+
 				<Card>
 					<CardHeader>
 						<Skeleton className='h-5 w-40' />
 					</CardHeader>
 					<CardContent className='space-y-4'>
 						{Array.from({ length: 5 }).map((_, index) => (
-							<div key={index} className='flex items-center space-x-4'>
+							<div
+								key={index}
+								className='flex items-center space-x-4'
+							>
 								<Skeleton className='h-8 w-8 rounded-full' />
 								<div className='flex-1'>
 									<Skeleton className='h-4 w-32 mb-1' />
