@@ -12,13 +12,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import {
 	Form,
 	FormControl,
@@ -27,8 +21,8 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
-import { newMemberAction } from './action';
 import { newMemberSchema } from './schema';
+import { createMember } from '../actions';
 
 export default function NewMemberPage() {
 	const router = useRouter();
@@ -48,7 +42,8 @@ export default function NewMemberPage() {
 		try {
 			const formData = new FormData();
 			Object.entries(data).forEach(([k, v]) => formData.append(k, v as string));
-			const result = await newMemberAction(null, formData);
+			const result = await createMember(formData);
+
 			if (result?.success) {
 				toast.success(result.message || 'Member created successfully!');
 				form.reset();
