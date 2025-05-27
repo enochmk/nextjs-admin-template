@@ -1,4 +1,4 @@
-import { SectionCards } from '@/components/section-cards';
+import { SectionCards } from '@/app/(main)/dashboard/components/section-cards';
 
 export default function Page() {
 	return (
