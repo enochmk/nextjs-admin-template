@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { ModeToggle } from '@/components/mode-toggle';
+import { ModeToggle } from '@/components/theme-provider/mode-toggle';
 import Link from 'next/link';
 
 export function SiteHeader() {
