@@ -1,8 +1,12 @@
 'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Link from 'next/link';
+import { toast } from 'sonner';
+import { redirect } from 'next/navigation';
+
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,8 +26,6 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { newMemberAction } from './action';
-import { toast } from 'sonner';
-import { redirect } from 'next/navigation';
 import { newMemberSchema } from './schema';
 
 export default function NewMemberPage() {

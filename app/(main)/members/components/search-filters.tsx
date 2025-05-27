@@ -1,24 +1,18 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { format } from 'date-fns';
+import { Search, X, Calendar as CalendarIcon, Filter } from 'lucide-react';
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
 import { Calendar } from '@/components/ui/calendar';
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
 } from '@/components/ui/popover';
-import { Search, X, Calendar as CalendarIcon, Filter } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
-import { format } from 'date-fns';
 
 interface SearchFiltersProps {
 	totalResults: number;
