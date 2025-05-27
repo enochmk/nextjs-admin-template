@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PlusIcon } from 'lucide-react';
+
 import MembersTable from './components/members-table';
 import SearchFilters from './components/search-filters';
 import PaginationControls from '@/components/ui/pagination-controls';
@@ -7,14 +8,15 @@ import { getMembersPaginated, type SearchParams } from './utils/members';
 import { parsePaginationParams } from '@/lib/pagination';
 
 interface MembersPageProps {
-	searchParams: { [key: string]: string | string[] | undefined };
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function MembersPage({ searchParams }: MembersPageProps) {
+	const resolvedSearchParams = await searchParams;
 	const urlSearchParams = new URLSearchParams();
 
 	// Convert searchParams to URLSearchParams
-	Object.entries(searchParams).forEach(([key, value]) => {
+	Object.entries(resolvedSearchParams).forEach(([key, value]) => {
 		if (typeof value === 'string') {
 			urlSearchParams.set(key, value);
 		} else if (Array.isArray(value)) {
