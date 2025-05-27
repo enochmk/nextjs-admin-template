@@ -42,7 +42,7 @@ export default function AppSidebar({
 				<NavMain items={sidebarData.navMain} />
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser user={sidebarData.user} />
+				<NavUser />
 			</SidebarFooter>
 		</Sidebar>
 	);

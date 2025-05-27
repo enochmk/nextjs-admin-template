@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -25,22 +28,33 @@ export default function SignInForm({
 	...props
 }: React.ComponentProps<'div'>) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const router = useRouter();
 	const form = useForm<z.infer<typeof signInFormSchema>>({
 		resolver: zodResolver(signInFormSchema),
 		defaultValues: {
-			username: '',
+			email: '',
 			password: '',
 		},
 	});
 
 	async function onSubmit(data: z.infer<typeof signInFormSchema>) {
 		setIsSubmitting(true);
-		// Simulate API call
 		try {
-			await new Promise((resolve) => setTimeout(resolve, 2000));
-			console.log('Sign in data:', data);
+			const result = await signIn('credentials', {
+				email: data.email,
+				password: data.password,
+				redirect: false,
+			});
+
+			if (result?.error) {
+				toast.error('Invalid email or password');
+			} else {
+				toast.success('Sign in successful!');
+				router.push('/dashboard');
+				router.refresh();
+			}
 		} catch (error) {
-			console.error('Sign in error:', error);
+			toast.error('Something went wrong. Please try again.');
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -64,13 +78,14 @@ export default function SignInForm({
 							<div className='grid gap-4'>
 								<FormField
 									control={form.control}
-									name='username'
+									name='email'
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>Username</FormLabel>
+											<FormLabel>Email</FormLabel>
 											<FormControl>
 												<Input
-													placeholder='shadcn'
+													type='email'
+													placeholder='your@email.com'
 													{...field}
 													disabled={isSubmitting}
 												/>
