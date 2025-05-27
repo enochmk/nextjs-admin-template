@@ -1,12 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import {
-	IconDashboard,
-	IconInnerShadowTop,
-	IconUsers,
-} from '@tabler/icons-react';
-
+import { IconInnerShadowTop } from '@tabler/icons-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -18,28 +13,11 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { sidebarData } from './data-sidebar';
 
-const data = {
-	user: {
-		name: 'shadcn',
-		email: 'm@example.com',
-		avatar: '/avatars/shadcn.jpg',
-	},
-	navMain: [
-		{
-			title: 'Dashboard',
-			url: '/dashboard',
-			icon: IconDashboard,
-		},
-		{
-			title: 'Members',
-			url: '/members',
-			icon: IconUsers,
-		},
-	],
-};
-
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export default function AppSidebar({
+	...props
+}: React.ComponentProps<typeof Sidebar>) {
 	return (
 		<Sidebar
 			collapsible='offcanvas'
@@ -61,10 +39,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				</SidebarMenu>
 			</SidebarHeader>
 			<SidebarContent>
-				<NavMain items={data.navMain} />
+				<NavMain items={sidebarData.navMain} />
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser user={data.user} />
+				<NavUser user={sidebarData.user} />
 			</SidebarFooter>
 		</Sidebar>
 	);
