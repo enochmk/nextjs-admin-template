@@ -20,7 +20,6 @@ export function MemberHeader({ memberData }: MemberHeaderProps) {
 			<div className='absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-xl blur-xl'></div>
 			<div className='relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-xl'>
 				<div className='flex flex-col lg:flex-row lg:items-center gap-6'>
-					{/* Navigation */}
 					<div className='flex items-center gap-4'>
 						<Link
 							href='/members'
@@ -29,11 +28,10 @@ export function MemberHeader({ memberData }: MemberHeaderProps) {
 							<div className='p-2 rounded-lg bg-gray-100 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors'>
 								<ArrowLeft className='h-4 w-4' />
 							</div>
-							<span className='hidden sm:inline'>Back to Members</span>
+							{/* <span className='hidden sm:inline'>Back to Members</span> */}
 						</Link>
 					</div>
 
-					{/* Member Info */}
 					<div className='flex-1 min-w-0'>
 						<div className='flex items-center gap-3 mb-2'>
 							<div className='w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-lg'>
@@ -81,13 +79,6 @@ export function MemberHeader({ memberData }: MemberHeaderProps) {
 								Edit Profile
 							</Button>
 						</Link>
-						<Button
-							variant='ghost'
-							size='icon'
-							className='hover:bg-gray-100 dark:hover:bg-gray-800'
-						>
-							<MoreVertical className='h-4 w-4' />
-						</Button>
 					</div>
 				</div>
 			</div>
