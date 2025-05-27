@@ -5,6 +5,7 @@ import { db } from '@/lib/db';
 import { members } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { notFound } from 'next/navigation';
+import EditMemberForm from './components/edit-member-form';
 
 interface EditMemberPageProps {
 	params: Promise<{ id: string }>;
@@ -32,35 +33,33 @@ export default async function EditMemberPage({ params }: EditMemberPageProps) {
 	const memberData = member[0];
 
 	return (
-		<div className='container mx-auto p-6 max-w-2xl'>
-			{/* Header */}
-			<div className='flex items-center gap-4 mb-6'>
-				<Link href={`/members/${memberData.id}`}>
-					<Button
-						variant='outline'
-						size='sm'
-					>
-						<ArrowLeft className='mr-2 h-4 w-4' />
-						Back to Member
-					</Button>
+		<div className='container mx-auto p-6 max-w-4xl'>
+			{/* Breadcrumb Navigation */}
+			<div className='mb-6'>
+				<Link
+					href={`/members/${memberData.id}`}
+					className='inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors'
+				>
+					<ArrowLeft className='mr-2 h-4 w-4' />
+					Back to {memberData.firstName} {memberData.lastName}
 				</Link>
-				<div>
-					<h1 className='text-2xl font-bold'>Edit Member</h1>
-					<p className='text-muted-foreground'>
-						Update {memberData.firstName} {memberData.lastName}&apos;s
-						information
-					</p>
+			</div>
+
+			{/* Page Header */}
+			<div className='mb-8'>
+				<div className='flex items-center justify-between'>
+					<div>
+						<h1 className='text-3xl font-bold tracking-tight'>Edit Member</h1>
+						<p className='text-muted-foreground mt-2'>
+							Update {memberData.firstName} {memberData.lastName}&apos;s profile
+							information
+						</p>
+					</div>
 				</div>
 			</div>
 
 			{/* Edit Form */}
-			<div className='bg-card rounded-lg border shadow-sm p-6'>
-				<p className='text-center text-muted-foreground py-8'>
-					Edit form will be implemented here.
-					<br />
-					Current member: {memberData.firstName} {memberData.lastName}
-				</p>
-			</div>
+			<EditMemberForm member={memberData} />
 		</div>
 	);
 }

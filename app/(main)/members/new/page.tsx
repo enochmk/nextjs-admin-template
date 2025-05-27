@@ -6,6 +6,7 @@ import { z } from 'zod';
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -52,27 +53,35 @@ export default function NewMemberPage() {
 	}
 
 	return (
-		<div className='container mx-auto py-6'>
-			<Card className='max-w-2xl mx-auto'>
-				<CardHeader>
-					<div className='flex items-center justify-between'>
-						<div>
-							<CardTitle>Add New Member</CardTitle>
-							<CardDescription>
-								Create a new member by filling out the form below.
-							</CardDescription>
-						</div>
-						<Link href='/members'>
-							<Button
-								variant='outline'
-								className='text-accent-foreground bg-accent hover:bg-accent/80'
-							>
-								← Back
-							</Button>
-						</Link>
+		<div className='container mx-auto p-6 max-w-4xl'>
+			{/* Breadcrumb Navigation */}
+			<div className='mb-6'>
+				<Link
+					href='/members'
+					className='inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors'
+				>
+					<ArrowLeft className='mr-2 h-4 w-4' />
+					Back to Members
+				</Link>
+			</div>
+
+			{/* Page Header */}
+			<div className='mb-8'>
+				<div className='flex items-center justify-between'>
+					<div>
+						<h1 className='text-3xl font-bold tracking-tight'>
+							Add New Member
+						</h1>
+						<p className='text-muted-foreground mt-2'>
+							Create a new member by filling out the form below
+						</p>
 					</div>
-				</CardHeader>
-				<CardContent>
+				</div>
+			</div>
+
+			{/* Add Form */}
+			<Card>
+				<CardContent className='p-6'>
 					<Form {...form}>
 						<form
 							onSubmit={form.handleSubmit(onSubmit)}
