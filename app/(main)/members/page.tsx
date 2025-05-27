@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { PlusIcon } from 'lucide-react';
 import MembersTable from './components/members-table';
+import SearchFilters from './components/search-filters';
 import PaginationControls from '@/components/ui/pagination-controls';
-import { getMembersPaginated } from '@/app/(main)/members/utils/members';
+import { getMembersPaginated, type SearchParams } from './utils/members';
 import { parsePaginationParams } from '@/lib/pagination';
 
 interface MembersPageProps {
@@ -21,8 +22,21 @@ export default async function MembersPage({ searchParams }: MembersPageProps) {
 		}
 	});
 
+	// Parse pagination parameters
 	const paginationParams = parsePaginationParams(urlSearchParams, 10);
-	const result = await getMembersPaginated(paginationParams);
+
+	// Parse search parameters
+	const searchFilters: SearchParams = {
+		search: urlSearchParams.get('search') || undefined,
+		dateFrom: urlSearchParams.get('dateFrom') || undefined,
+		dateTo: urlSearchParams.get('dateTo') || undefined,
+	};
+
+	// Get members with search and pagination
+	const result = await getMembersPaginated({
+		...paginationParams,
+		search: searchFilters,
+	});
 
 	return (
 		<div className='container mx-auto p-6'>
@@ -41,6 +55,9 @@ export default async function MembersPage({ searchParams }: MembersPageProps) {
 					Add Member
 				</Link>
 			</div>
+
+			<SearchFilters totalResults={result.pagination.total} />
+
 			<div className='bg-card rounded-lg border shadow-sm'>
 				<MembersTable
 					membersList={result.data}
