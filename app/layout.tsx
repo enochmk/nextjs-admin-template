@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { SessionProvider } from 'next-auth/react';
 import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/theme-provider/theme-provider';
-import { SessionProvider } from 'next-auth/react';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
