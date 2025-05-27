@@ -13,27 +13,24 @@ interface MembersPageProps {
 
 function MembersTableSkeleton() {
 	return (
-		<div className='bg-card rounded-lg border'>
-			<div className='p-4'>
-				<div className='space-y-4'>
-					<Skeleton className='h-10 w-full' />
+		<div className="bg-card rounded-lg border">
+			<div className="p-4">
+				<div className="space-y-4">
+					<Skeleton className="h-10 w-full" />
 					{Array.from({ length: 5 }).map((_, i) => (
-						<Skeleton
-							key={i}
-							className='h-12 w-full'
-						/>
+						<Skeleton key={i} className="h-12 w-full" />
 					))}
 				</div>
 			</div>
-			<div className='border-t p-4'>
-				<div className='flex justify-between items-center'>
-					<Skeleton className='h-4 w-48' />
-					<div className='flex space-x-2'>
-						<Skeleton className='h-8 w-20' />
-						<Skeleton className='h-8 w-8' />
-						<Skeleton className='h-8 w-8' />
-						<Skeleton className='h-8 w-8' />
-						<Skeleton className='h-8 w-20' />
+			<div className="border-t p-4">
+				<div className="flex items-center justify-between">
+					<Skeleton className="h-4 w-48" />
+					<div className="flex space-x-2">
+						<Skeleton className="h-8 w-20" />
+						<Skeleton className="h-8 w-8" />
+						<Skeleton className="h-8 w-8" />
+						<Skeleton className="h-8 w-8" />
+						<Skeleton className="h-8 w-20" />
 					</div>
 				</div>
 			</div>
@@ -57,7 +54,7 @@ async function MembersContent({ searchParams }: MembersPageProps) {
 	const result = await getMembersPaginated(paginationParams);
 
 	return (
-		<div className='bg-card rounded-lg border'>
+		<div className="bg-card rounded-lg border">
 			<MembersTable
 				membersList={result.data}
 				currentPage={result.pagination.page}
@@ -77,14 +74,14 @@ async function MembersContent({ searchParams }: MembersPageProps) {
 
 export default function MembersPage({ searchParams }: MembersPageProps) {
 	return (
-		<div className='container mx-auto p-6'>
-			<div className='flex justify-between items-center mb-6'>
-				<h1 className='text-2xl font-bold'>Members</h1>
+		<div className="container mx-auto p-6">
+			<div className="mb-6 flex items-center justify-between">
+				<h1 className="text-2xl font-bold">Members</h1>
 				<Link
-					href='/members/new'
-					className='bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 rounded inline-block'
+					href="/members/new"
+					className="bg-primary hover:bg-primary/90 text-primary-foreground inline-block rounded px-4 py-2"
 				>
-					<PlusIcon className='inline mr-1' />
+					<PlusIcon className="mr-1 inline" />
 					Add Member
 				</Link>
 			</div>

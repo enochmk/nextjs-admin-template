@@ -22,7 +22,7 @@ export function calculateOffset(page: number, limit: number): number {
 export function calculatePagination(
 	page: number,
 	limit: number,
-	total: number,
+	total: number
 ) {
 	const totalPages = Math.ceil(total / limit);
 
@@ -38,12 +38,12 @@ export function calculatePagination(
 
 export function parsePaginationParams(
 	searchParams: URLSearchParams,
-	defaultLimit = 10,
+	defaultLimit = 10
 ): PaginationParams {
 	const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
 	const limit = Math.max(
 		1,
-		parseInt(searchParams.get('limit') || defaultLimit.toString(), 10),
+		parseInt(searchParams.get('limit') || defaultLimit.toString(), 10)
 	);
 
 	return { page, limit };

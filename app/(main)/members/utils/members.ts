@@ -20,7 +20,7 @@ export interface MembersQueryParams extends PaginationParams {
 }
 
 export async function getMembersPaginated(
-	params: MembersQueryParams,
+	params: MembersQueryParams
 ): Promise<PaginationResult<Member>> {
 	const offset = calculateOffset(params.page, params.limit);
 
@@ -33,8 +33,8 @@ export async function getMembersPaginated(
 			or(
 				ilike(members.firstName, searchTerm),
 				ilike(members.lastName, searchTerm),
-				ilike(members.phoneNumber, searchTerm),
-			)!,
+				ilike(members.phoneNumber, searchTerm)
+			)!
 		);
 	}
 

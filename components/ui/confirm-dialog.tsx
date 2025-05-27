@@ -32,25 +32,18 @@ export function ConfirmDialog({
 	isLoading = false,
 }: ConfirmDialogProps) {
 	return (
-		<Dialog
-			open={isOpen}
-			onOpenChange={onClose}
-		>
-			<DialogContent className='sm:max-w-[425px]'>
+		<Dialog open={isOpen} onOpenChange={onClose}>
+			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
 					<DialogTitle>{title}</DialogTitle>
 					<DialogDescription>{description}</DialogDescription>
 				</DialogHeader>
 				<DialogFooter>
-					<Button
-						variant='outline'
-						onClick={onClose}
-						disabled={isLoading}
-					>
+					<Button variant="outline" onClick={onClose} disabled={isLoading}>
 						{cancelText}
 					</Button>
 					<Button
-						variant='destructive'
+						variant="destructive"
 						onClick={onConfirm}
 						disabled={isLoading}
 					>

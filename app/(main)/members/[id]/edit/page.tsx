@@ -33,24 +33,24 @@ export default async function EditMemberPage({ params }: EditMemberPageProps) {
 	const memberData = member[0];
 
 	return (
-		<div className='container mx-auto p-6 max-w-4xl'>
+		<div className="container mx-auto max-w-4xl p-6">
 			{/* Breadcrumb Navigation */}
-			<div className='mb-6'>
+			<div className="mb-6">
 				<Link
 					href={`/members/${memberData.id}`}
-					className='inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors'
+					className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors"
 				>
-					<ArrowLeft className='mr-2 h-4 w-4' />
+					<ArrowLeft className="mr-2 h-4 w-4" />
 					Back to {memberData.firstName} {memberData.lastName}
 				</Link>
 			</div>
 
 			{/* Page Header */}
-			<div className='mb-8'>
-				<div className='flex items-center justify-between'>
+			<div className="mb-8">
+				<div className="flex items-center justify-between">
 					<div>
-						<h1 className='text-3xl font-bold tracking-tight'>Edit Member</h1>
-						<p className='text-muted-foreground mt-2'>
+						<h1 className="text-3xl font-bold tracking-tight">Edit Member</h1>
+						<p className="text-muted-foreground mt-2">
 							Update {memberData.firstName} {memberData.lastName}&apos;s profile
 							information
 						</p>

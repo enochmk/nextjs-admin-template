@@ -36,14 +36,14 @@ export default async function MemberPage({ params }: MemberPageProps) {
 	const memberData = member[0];
 
 	return (
-		<div className='container mx-auto p-6 max-w-6xl'>
+		<div className="container mx-auto max-w-6xl p-6">
 			<MemberHeader memberData={memberData} />
-			<div className='grid gap-6 lg:grid-cols-3'>
-				<div className='lg:col-span-2 space-y-6'>
+			<div className="grid gap-6 lg:grid-cols-3">
+				<div className="space-y-6 lg:col-span-2">
 					<PersonalInformationCard memberData={memberData} />
 					{/* <ActivityStatsCard memberData={memberData} /> */}
 				</div>
-				<div className='space-y-6'>
+				<div className="space-y-6">
 					<AccountOverviewCard memberData={memberData} />
 					<QuickActionsCard memberData={memberData} />
 				</div>

@@ -16,12 +16,12 @@ export function CopyButton({ text, size = 'sm', className }: CopyButtonProps) {
 
 	return (
 		<Button
-			variant='ghost'
+			variant="ghost"
 			size={size}
 			className={className}
 			onClick={handleCopy}
 		>
-			<Copy className='h-3 w-3' />
+			<Copy className="h-3 w-3" />
 		</Button>
 	);
 }

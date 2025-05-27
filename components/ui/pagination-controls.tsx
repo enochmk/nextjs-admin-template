@@ -91,58 +91,55 @@ export default function PaginationControls({
 	if (total === 0) return null;
 
 	return (
-		<div className='flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t'>
-			<div className='flex items-center gap-4 text-sm text-muted-foreground'>
+		<div className="flex flex-col items-center justify-between gap-4 border-t px-6 py-4 sm:flex-row">
+			<div className="text-muted-foreground flex items-center gap-4 text-sm">
 				<div>
 					Showing {startItem} to {endItem} of {total} results
 				</div>
-				<div className='flex items-center gap-2'>
+				<div className="flex items-center gap-2">
 					<span>Items per page:</span>
-					<Select
-						value={limit.toString()}
-						onValueChange={handleLimitChange}
-					>
-						<SelectTrigger className='w-20'>
+					<Select value={limit.toString()} onValueChange={handleLimitChange}>
+						<SelectTrigger className="w-20">
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value='5'>5</SelectItem>
-							<SelectItem value='10'>10</SelectItem>
-							<SelectItem value='20'>20</SelectItem>
-							<SelectItem value='50'>50</SelectItem>
+							<SelectItem value="5">5</SelectItem>
+							<SelectItem value="10">10</SelectItem>
+							<SelectItem value="20">20</SelectItem>
+							<SelectItem value="50">50</SelectItem>
 						</SelectContent>
 					</Select>
 				</div>
 			</div>
 
-			<div className='flex items-center space-x-2'>
+			<div className="flex items-center space-x-2">
 				<Button
-					variant='outline'
-					size='sm'
+					variant="outline"
+					size="sm"
 					onClick={() => handlePageChange(currentPage - 1)}
 					disabled={!hasPrev || isPending}
 				>
 					{isPending ? (
-						<Loader2 className='h-4 w-4 animate-spin' />
+						<Loader2 className="h-4 w-4 animate-spin" />
 					) : (
-						<ChevronLeft className='h-4 w-4' />
+						<ChevronLeft className="h-4 w-4" />
 					)}
 					Previous
 				</Button>
 
-				<div className='flex items-center space-x-1'>
+				<div className="flex items-center space-x-1">
 					{getVisiblePages().map((page, index) => (
 						<div key={index}>
 							{page === '...' ? (
-								<span className='px-3 py-2 text-sm text-muted-foreground'>
+								<span className="text-muted-foreground px-3 py-2 text-sm">
 									...
 								</span>
 							) : (
 								<Button
 									variant={currentPage === page ? 'default' : 'outline'}
-									size='sm'
+									size="sm"
 									onClick={() => handlePageChange(page as number)}
-									className='min-w-[2.5rem]'
+									className="min-w-[2.5rem]"
 									disabled={isPending}
 								>
 									{page}
@@ -153,16 +150,16 @@ export default function PaginationControls({
 				</div>
 
 				<Button
-					variant='outline'
-					size='sm'
+					variant="outline"
+					size="sm"
 					onClick={() => handlePageChange(currentPage + 1)}
 					disabled={!hasNext || isPending}
 				>
 					Next
 					{isPending ? (
-						<Loader2 className='h-4 w-4 animate-spin' />
+						<Loader2 className="h-4 w-4 animate-spin" />
 					) : (
-						<ChevronRight className='h-4 w-4' />
+						<ChevronRight className="h-4 w-4" />
 					)}
 				</Button>
 			</div>

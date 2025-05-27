@@ -25,7 +25,7 @@ export default async function MainLayout({
 				} as React.CSSProperties
 			}
 		>
-			<AppSidebar variant='inset' />
+			<AppSidebar variant="inset" />
 			<SidebarInset>
 				<SiteHeader />
 				{children}

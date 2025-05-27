@@ -83,20 +83,17 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 			</CardHeader>
 			<CardContent>
 				<Form {...form}>
-					<form
-						onSubmit={form.handleSubmit(onSubmit)}
-						className='space-y-4'
-					>
-						<div className='grid grid-cols-2 gap-4'>
+					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+						<div className="grid grid-cols-2 gap-4">
 							<FormField
 								control={form.control}
-								name='firstName'
+								name="firstName"
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>First Name</FormLabel>
 										<FormControl>
 											<Input
-												placeholder='Enter first name'
+												placeholder="Enter first name"
 												{...field}
 												disabled={form.formState.isSubmitting}
 											/>
@@ -107,13 +104,13 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 							/>
 							<FormField
 								control={form.control}
-								name='lastName'
+								name="lastName"
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Last Name</FormLabel>
 										<FormControl>
 											<Input
-												placeholder='Enter last name'
+												placeholder="Enter last name"
 												{...field}
 												disabled={form.formState.isSubmitting}
 											/>
@@ -125,13 +122,13 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 						</div>
 						<FormField
 							control={form.control}
-							name='dateOfBirth'
+							name="dateOfBirth"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Date of Birth</FormLabel>
 									<FormControl>
 										<Input
-											type='date'
+											type="date"
 											{...field}
 											disabled={form.formState.isSubmitting}
 										/>
@@ -142,13 +139,13 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 						/>
 						<FormField
 							control={form.control}
-							name='phoneNumber'
+							name="phoneNumber"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Phone Number</FormLabel>
 									<FormControl>
 										<Input
-											placeholder='Enter phone number'
+											placeholder="Enter phone number"
 											{...field}
 											disabled={form.formState.isSubmitting}
 										/>
@@ -157,24 +154,24 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 								</FormItem>
 							)}
 						/>
-						<div className='flex gap-4 pt-4'>
+						<div className="flex gap-4 pt-4">
 							<Button
-								type='button'
-								variant='outline'
-								className='flex-1'
+								type="button"
+								variant="outline"
+								className="flex-1"
 								onClick={() => router.push(`/members/${member.id}`)}
 								disabled={form.formState.isSubmitting}
 							>
 								Cancel
 							</Button>
 							<Button
-								type='submit'
-								className='flex-1'
+								type="submit"
+								className="flex-1"
 								disabled={form.formState.isSubmitting}
 							>
 								{form.formState.isSubmitting ? (
 									<>
-										<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 										Updating...
 									</>
 								) : (

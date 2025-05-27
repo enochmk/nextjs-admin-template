@@ -41,26 +41,26 @@ export default async function MembersPage({ searchParams }: MembersPageProps) {
 	});
 
 	return (
-		<div className='container mx-auto p-6'>
-			<div className='flex justify-between items-center mb-6'>
+		<div className="container mx-auto p-6">
+			<div className="mb-6 flex items-center justify-between">
 				<div>
-					<h1 className='text-2xl font-bold'>Members</h1>
-					<p className='text-muted-foreground mt-1'>
+					<h1 className="text-2xl font-bold">Members</h1>
+					<p className="text-muted-foreground mt-1">
 						Manage your organization members
 					</p>
 				</div>
 				<Link
-					href='/members/new'
-					className='bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 rounded inline-block transition-colors'
+					href="/members/new"
+					className="bg-primary hover:bg-primary/90 text-primary-foreground inline-block rounded px-4 py-2 transition-colors"
 				>
-					<PlusIcon className='inline mr-1 h-4 w-4' />
+					<PlusIcon className="mr-1 inline h-4 w-4" />
 					Add Member
 				</Link>
 			</div>
 
 			<SearchFilters totalResults={result.pagination.total} />
 
-			<div className='bg-card rounded-lg border shadow-sm'>
+			<div className="bg-card rounded-lg border shadow-sm">
 				<MembersTable
 					membersList={result.data}
 					currentPage={result.pagination.page}

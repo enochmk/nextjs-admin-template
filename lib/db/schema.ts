@@ -45,11 +45,11 @@ export const accounts = pgTable(
 		id_token: text('id_token'),
 		session_state: text('session_state'),
 	},
-	(account) => ({
+	account => ({
 		compoundKey: primaryKey({
 			columns: [account.provider, account.providerAccountId],
 		}),
-	}),
+	})
 );
 
 export const sessions = pgTable('session', {
@@ -67,9 +67,9 @@ export const verificationTokens = pgTable(
 		token: text('token').notNull(),
 		expires: timestamp('expires', { mode: 'date' }).notNull(),
 	},
-	(vt) => ({
+	vt => ({
 		compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-	}),
+	})
 );
 
 export type Member = typeof members.$inferSelect;

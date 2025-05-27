@@ -38,7 +38,7 @@ if (require.main === module) {
 			console.log('✅ Seeding completed');
 			process.exit(0);
 		})
-		.catch((error) => {
+		.catch(error => {
 			console.error('❌ Seeding failed:', error);
 			process.exit(1);
 		});

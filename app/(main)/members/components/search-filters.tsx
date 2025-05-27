@@ -30,17 +30,17 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 	const [isPending, startTransition] = useTransition();
 
 	const [searchQuery, setSearchQuery] = useState(
-		searchParams.get('search') || '',
+		searchParams.get('search') || ''
 	);
 	const [dateFrom, setDateFrom] = useState<Date | undefined>(
 		searchParams.get('dateFrom')
 			? new Date(searchParams.get('dateFrom')!)
-			: undefined,
+			: undefined
 	);
 	const [dateTo, setDateTo] = useState<Date | undefined>(
 		searchParams.get('dateTo')
 			? new Date(searchParams.get('dateTo')!)
-			: undefined,
+			: undefined
 	);
 
 	const createSearchURL = (params: Record<string, string | undefined>) => {
@@ -98,47 +98,44 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 	const hasActiveFilters = searchQuery || dateFrom || dateTo;
 
 	return (
-		<div className='bg-card border rounded-lg p-4 mb-6'>
-			<div className='flex flex-col lg:flex-row gap-4'>
+		<div className="bg-card mb-6 rounded-lg border p-4">
+			<div className="flex flex-col gap-4 lg:flex-row">
 				{/* Search Input */}
-				<div className='flex-1'>
-					<div className='relative'>
-						<Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
+				<div className="flex-1">
+					<div className="relative">
+						<Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform" />
 						<Input
-							placeholder='Search by name or phone number...'
+							placeholder="Search by name or phone number..."
 							value={searchQuery}
-							onChange={(e) => setSearchQuery(e.target.value)}
+							onChange={e => setSearchQuery(e.target.value)}
 							onKeyPress={handleKeyPress}
-							className='pl-10'
+							className="pl-10"
 							disabled={isPending}
 						/>
 						{isPending && (
-							<div className='absolute right-3 top-1/2 transform -translate-y-1/2'>
-								<Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
+							<div className="absolute top-1/2 right-3 -translate-y-1/2 transform">
+								<Loader2 className="text-muted-foreground h-4 w-4 animate-spin" />
 							</div>
 						)}
 					</div>
 				</div>
 
 				{/* Date Filters */}
-				<div className='flex gap-2'>
+				<div className="flex gap-2">
 					<Popover>
 						<PopoverTrigger asChild>
 							<Button
-								variant='outline'
-								className='w-40 justify-start text-left font-normal'
+								variant="outline"
+								className="w-40 justify-start text-left font-normal"
 								disabled={isPending}
 							>
-								<CalendarIcon className='mr-2 h-4 w-4' />
+								<CalendarIcon className="mr-2 h-4 w-4" />
 								{dateFrom ? format(dateFrom, 'MMM dd, yyyy') : 'From date'}
 							</Button>
 						</PopoverTrigger>
-						<PopoverContent
-							className='w-auto p-0'
-							align='start'
-						>
+						<PopoverContent className="w-auto p-0" align="start">
 							<Calendar
-								mode='single'
+								mode="single"
 								selected={dateFrom}
 								onSelect={setDateFrom}
 								initialFocus
@@ -150,20 +147,17 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 					<Popover>
 						<PopoverTrigger asChild>
 							<Button
-								variant='outline'
-								className='w-40 justify-start text-left font-normal'
+								variant="outline"
+								className="w-40 justify-start text-left font-normal"
 								disabled={isPending}
 							>
-								<CalendarIcon className='mr-2 h-4 w-4' />
+								<CalendarIcon className="mr-2 h-4 w-4" />
 								{dateTo ? format(dateTo, 'MMM dd, yyyy') : 'To date'}
 							</Button>
 						</PopoverTrigger>
-						<PopoverContent
-							className='w-auto p-0'
-							align='start'
-						>
+						<PopoverContent className="w-auto p-0" align="start">
 							<Calendar
-								mode='single'
+								mode="single"
 								selected={dateTo}
 								onSelect={setDateTo}
 								initialFocus
@@ -174,16 +168,12 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 				</div>
 
 				{/* Action Buttons */}
-				<div className='flex gap-2'>
-					<Button
-						onClick={handleSearch}
-						size='sm'
-						disabled={isPending}
-					>
+				<div className="flex gap-2">
+					<Button onClick={handleSearch} size="sm" disabled={isPending}>
 						{isPending ? (
-							<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+							<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 						) : (
-							<Filter className='mr-2 h-4 w-4' />
+							<Filter className="mr-2 h-4 w-4" />
 						)}
 						Apply
 					</Button>
@@ -191,14 +181,14 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 					{hasActiveFilters && (
 						<Button
 							onClick={handleClearFilters}
-							variant='outline'
-							size='sm'
+							variant="outline"
+							size="sm"
 							disabled={isPending}
 						>
 							{isPending ? (
-								<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 							) : (
-								<X className='mr-2 h-4 w-4' />
+								<X className="mr-2 h-4 w-4" />
 							)}
 							Clear
 						</Button>
@@ -208,9 +198,9 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 
 			{/* Results Summary */}
 			{hasActiveFilters && (
-				<div className='mt-3 pt-3 border-t'>
-					<div className='flex items-center justify-between text-sm text-muted-foreground'>
-						<div className='flex items-center gap-4'>
+				<div className="mt-3 border-t pt-3">
+					<div className="text-muted-foreground flex items-center justify-between text-sm">
+						<div className="flex items-center gap-4">
 							{searchQuery && (
 								<span>
 									Search: <strong>&ldquo;{searchQuery}&rdquo;</strong>

@@ -11,41 +11,41 @@ interface ActivityStatsCardProps {
 
 export function ActivityStatsCard({ memberData }: ActivityStatsCardProps) {
 	return (
-		<Card className='bg-card border shadow-sm'>
+		<Card className="bg-card border shadow-sm">
 			<CardHeader>
-				<CardTitle className='flex items-center gap-2'>
-					<Activity className='h-5 w-5' />
+				<CardTitle className="flex items-center gap-2">
+					<Activity className="h-5 w-5" />
 					Member Activity
 				</CardTitle>
 			</CardHeader>
 			<CardContent>
-				<div className='grid gap-4 sm:grid-cols-3'>
-					<div className='text-center p-4 rounded-lg border bg-muted/30'>
-						<div className='mx-auto w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-2'>
-							<Star className='h-5 w-5 text-primary' />
+				<div className="grid gap-4 sm:grid-cols-3">
+					<div className="bg-muted/30 rounded-lg border p-4 text-center">
+						<div className="bg-primary/10 mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full">
+							<Star className="text-primary h-5 w-5" />
 						</div>
-						<div className='text-2xl font-bold'>4.8</div>
-						<div className='text-sm text-muted-foreground'>Rating</div>
+						<div className="text-2xl font-bold">4.8</div>
+						<div className="text-muted-foreground text-sm">Rating</div>
 					</div>
-					<div className='text-center p-4 rounded-lg border bg-muted/30'>
-						<div className='mx-auto w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-2'>
-							<Activity className='h-5 w-5 text-primary' />
+					<div className="bg-muted/30 rounded-lg border p-4 text-center">
+						<div className="bg-primary/10 mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full">
+							<Activity className="text-primary h-5 w-5" />
 						</div>
-						<div className='text-2xl font-bold'>24</div>
-						<div className='text-sm text-muted-foreground'>Activities</div>
+						<div className="text-2xl font-bold">24</div>
+						<div className="text-muted-foreground text-sm">Activities</div>
 					</div>
-					<div className='text-center p-4 rounded-lg border bg-muted/30'>
-						<div className='mx-auto w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-2'>
-							<Calendar className='h-5 w-5 text-primary' />
+					<div className="bg-muted/30 rounded-lg border p-4 text-center">
+						<div className="bg-primary/10 mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full">
+							<Calendar className="text-primary h-5 w-5" />
 						</div>
-						<div className='text-2xl font-bold'>
+						<div className="text-2xl font-bold">
 							{Math.floor(
 								(new Date().getTime() -
 									new Date(memberData.createdAt).getTime()) /
-									(1000 * 60 * 60 * 24),
+									(1000 * 60 * 60 * 24)
 							)}
 						</div>
-						<div className='text-sm text-muted-foreground'>Days Active</div>
+						<div className="text-muted-foreground text-sm">Days Active</div>
 					</div>
 				</div>
 			</CardContent>

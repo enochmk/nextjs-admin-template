@@ -75,29 +75,29 @@ export default function MembersTable({
 	};
 
 	return (
-		<div className='px-6'>
+		<div className="px-6">
 			<Table>
 				<TableHeader>
-					<TableRow className='border-b bg-muted/30'>
-						<TableHead className='h-12 px-4 text-left align-middle font-semibold text-foreground tracking-wide w-16'>
+					<TableRow className="bg-muted/30 border-b">
+						<TableHead className="text-foreground h-12 w-16 px-4 text-left align-middle font-semibold tracking-wide">
 							#
 						</TableHead>
-						<TableHead className='h-12 px-4 text-left align-middle font-semibold text-foreground tracking-wide'>
+						<TableHead className="text-foreground h-12 px-4 text-left align-middle font-semibold tracking-wide">
 							First Name
 						</TableHead>
-						<TableHead className='h-12 px-4 text-left align-middle font-semibold text-foreground tracking-wide'>
+						<TableHead className="text-foreground h-12 px-4 text-left align-middle font-semibold tracking-wide">
 							Last Name
 						</TableHead>
-						<TableHead className='h-12 px-4 text-left align-middle font-semibold text-foreground tracking-wide'>
+						<TableHead className="text-foreground h-12 px-4 text-left align-middle font-semibold tracking-wide">
 							Date of Birth
 						</TableHead>
-						<TableHead className='h-12 px-4 text-left align-middle font-semibold text-foreground tracking-wide'>
+						<TableHead className="text-foreground h-12 px-4 text-left align-middle font-semibold tracking-wide">
 							Phone Number
 						</TableHead>
-						<TableHead className='h-12 px-4 text-left align-middle font-semibold text-foreground tracking-wide'>
+						<TableHead className="text-foreground h-12 px-4 text-left align-middle font-semibold tracking-wide">
 							Created On
 						</TableHead>
-						<TableHead className='h-12 px-4 text-right align-middle font-semibold text-foreground tracking-wide w-20'>
+						<TableHead className="text-foreground h-12 w-20 px-4 text-right align-middle font-semibold tracking-wide">
 							Actions
 						</TableHead>
 					</TableRow>
@@ -107,15 +107,15 @@ export default function MembersTable({
 						<TableRow>
 							<TableCell
 								colSpan={7}
-								className='text-center py-16 text-muted-foreground border-0'
+								className="text-muted-foreground border-0 py-16 text-center"
 							>
-								<div className='flex flex-col items-center space-y-3'>
-									<div className='w-12 h-12 rounded-full bg-muted flex items-center justify-center'>
-										<span className='text-xl'>👥</span>
+								<div className="flex flex-col items-center space-y-3">
+									<div className="bg-muted flex h-12 w-12 items-center justify-center rounded-full">
+										<span className="text-xl">👥</span>
 									</div>
-									<div className='space-y-1'>
-										<p className='text-lg font-medium'>No members found</p>
-										<p className='text-sm text-muted-foreground'>
+									<div className="space-y-1">
+										<p className="text-lg font-medium">No members found</p>
+										<p className="text-muted-foreground text-sm">
 											Add your first member to get started.
 										</p>
 									</div>
@@ -126,24 +126,24 @@ export default function MembersTable({
 						membersList.map((member, index) => (
 							<TableRow
 								key={member.id}
-								className='hover:bg-muted/40 transition-colors border-b border-border/40'
+								className="hover:bg-muted/40 border-border/40 border-b transition-colors"
 							>
-								<TableCell className='px-4 py-4 text-muted-foreground font-medium text-sm w-16'>
+								<TableCell className="text-muted-foreground w-16 px-4 py-4 text-sm font-medium">
 									{startingPosition + index + 1}
 								</TableCell>
-								<TableCell className='px-4 py-4 font-medium text-foreground'>
+								<TableCell className="text-foreground px-4 py-4 font-medium">
 									{member.firstName}
 								</TableCell>
-								<TableCell className='px-4 py-4 text-foreground'>
+								<TableCell className="text-foreground px-4 py-4">
 									{member.lastName}
 								</TableCell>
-								<TableCell className='px-4 py-4 text-muted-foreground font-mono text-sm'>
+								<TableCell className="text-muted-foreground px-4 py-4 font-mono text-sm">
 									{member.dateOfBirth}
 								</TableCell>
-								<TableCell className='px-4 py-4 text-muted-foreground font-mono text-sm'>
+								<TableCell className="text-muted-foreground px-4 py-4 font-mono text-sm">
 									{member.phoneNumber}
 								</TableCell>
-								<TableCell className='px-4 py-4 text-muted-foreground text-sm'>
+								<TableCell className="text-muted-foreground px-4 py-4 text-sm">
 									{new Date(member.createdAt).toLocaleDateString('en-US', {
 										year: 'numeric',
 										month: 'short',
@@ -152,46 +152,43 @@ export default function MembersTable({
 										minute: '2-digit',
 									})}
 								</TableCell>
-								<TableCell className='px-4 py-4 text-right'>
+								<TableCell className="px-4 py-4 text-right">
 									<DropdownMenu>
 										<DropdownMenuTrigger asChild>
 											<Button
-												variant='ghost'
-												className='h-8 w-8 p-0 hover:bg-muted'
+												variant="ghost"
+												className="hover:bg-muted h-8 w-8 p-0"
 											>
-												<span className='sr-only'>Open menu</span>
-												<MoreHorizontal className='h-4 w-4' />
+												<span className="sr-only">Open menu</span>
+												<MoreHorizontal className="h-4 w-4" />
 											</Button>
 										</DropdownMenuTrigger>
-										<DropdownMenuContent
-											align='end'
-											className='w-40'
-										>
+										<DropdownMenuContent align="end" className="w-40">
 											<DropdownMenuItem asChild>
 												<Link
 													href={`/members/${member.id}`}
-													className='flex items-center cursor-pointer'
+													className="flex cursor-pointer items-center"
 												>
-													<Eye className='mr-2 h-4 w-4' />
+													<Eye className="mr-2 h-4 w-4" />
 													View
 												</Link>
 											</DropdownMenuItem>
 											<DropdownMenuItem asChild>
 												<Link
 													href={`/members/${member.id}/edit`}
-													className='flex items-center cursor-pointer'
+													className="flex cursor-pointer items-center"
 												>
-													<Edit className='mr-2 h-4 w-4' />
+													<Edit className="mr-2 h-4 w-4" />
 													Edit
 												</Link>
 											</DropdownMenuItem>
 											<DropdownMenuSeparator />
 											<DropdownMenuItem
-												className='text-destructive focus:text-destructive focus:bg-destructive/10 cursor-pointer'
+												className="text-destructive focus:text-destructive focus:bg-destructive/10 cursor-pointer"
 												onClick={() => handleDeleteClick(member.id)}
 												disabled={isDeleting === member.id}
 											>
-												<Trash2 className='mr-2 h-4 w-4' />
+												<Trash2 className="mr-2 h-4 w-4" />
 												{isDeleting === member.id ? 'Deleting...' : 'Delete'}
 											</DropdownMenuItem>
 										</DropdownMenuContent>
@@ -207,10 +204,10 @@ export default function MembersTable({
 				isOpen={confirmDialog.isOpen}
 				onClose={handleDeleteCancel}
 				onConfirm={handleDeleteConfirm}
-				title='Delete Member'
-				description='Are you sure you want to delete this member? This action cannot be undone.'
-				confirmText='Delete'
-				cancelText='Cancel'
+				title="Delete Member"
+				description="Are you sure you want to delete this member? This action cannot be undone."
+				confirmText="Delete"
+				cancelText="Cancel"
 				isLoading={isDeleting !== null}
 			/>
 		</div>

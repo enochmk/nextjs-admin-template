@@ -15,7 +15,7 @@ export interface ActionState {
 export async function editMemberAction(
 	memberId: number,
 	prevState: ActionState | null,
-	formData: FormData,
+	formData: FormData
 ): Promise<ActionState> {
 	try {
 		// Parse form data

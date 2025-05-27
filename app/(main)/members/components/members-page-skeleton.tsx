@@ -4,14 +4,14 @@ import MembersTableSkeleton from './members-table-skeleton';
 
 export default function MembersPageSkeleton() {
 	return (
-		<div className='container mx-auto p-6'>
+		<div className="container mx-auto p-6">
 			{/* Header Skeleton */}
-			<div className='flex justify-between items-center mb-6'>
+			<div className="mb-6 flex items-center justify-between">
 				<div>
-					<Skeleton className='h-8 w-32 mb-2' />
-					<Skeleton className='h-4 w-48' />
+					<Skeleton className="mb-2 h-8 w-32" />
+					<Skeleton className="h-4 w-48" />
 				</div>
-				<Skeleton className='h-10 w-32' />
+				<Skeleton className="h-10 w-32" />
 			</div>
 
 			{/* Search Filters Skeleton */}

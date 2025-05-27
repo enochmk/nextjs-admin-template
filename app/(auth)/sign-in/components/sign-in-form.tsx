@@ -61,31 +61,25 @@ export default function SignInForm({
 	}
 
 	return (
-		<div
-			className={cn('flex flex-col gap-6', className)}
-			{...props}
-		>
+		<div className={cn('flex flex-col gap-6', className)} {...props}>
 			<Card>
-				<CardHeader className='text-center'>
-					<CardTitle className='text-xl'>Welcome</CardTitle>
+				<CardHeader className="text-center">
+					<CardTitle className="text-xl">Welcome</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<Form {...form}>
-						<form
-							onSubmit={form.handleSubmit(onSubmit)}
-							className='space-y-8'
-						>
-							<div className='grid gap-4'>
+						<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+							<div className="grid gap-4">
 								<FormField
 									control={form.control}
-									name='email'
+									name="email"
 									render={({ field }) => (
 										<FormItem>
 											<FormLabel>Email</FormLabel>
 											<FormControl>
 												<Input
-													type='email'
-													placeholder='your@email.com'
+													type="email"
+													placeholder="your@email.com"
 													{...field}
 													disabled={isSubmitting}
 												/>
@@ -96,14 +90,14 @@ export default function SignInForm({
 								/>
 								<FormField
 									control={form.control}
-									name='password'
+									name="password"
 									render={({ field }) => (
 										<FormItem>
 											<FormLabel>Password</FormLabel>
 											<FormControl>
 												<Input
-													type='password'
-													placeholder='********'
+													type="password"
+													placeholder="********"
 													{...field}
 													disabled={isSubmitting}
 												/>
@@ -113,13 +107,13 @@ export default function SignInForm({
 									)}
 								/>
 								<Button
-									type='submit'
-									className='w-full'
+									type="submit"
+									className="w-full"
 									disabled={isSubmitting}
 								>
 									{isSubmitting ? (
 										<>
-											<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+											<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 											Signing in...
 										</>
 									) : (
@@ -132,9 +126,9 @@ export default function SignInForm({
 				</CardContent>
 			</Card>
 
-			<div className='text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4'>
-				By clicking continue, you agree to our <a href='#'>Terms of Service</a>{' '}
-				and <a href='#'>Privacy Policy</a>.
+			<div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
+				By clicking continue, you agree to our <a href="#">Terms of Service</a>{' '}
+				and <a href="#">Privacy Policy</a>.
 			</div>
 		</div>
 	);

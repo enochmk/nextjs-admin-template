@@ -26,22 +26,19 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html
-			lang='en'
-			suppressHydrationWarning
-		>
+		<html lang="en" suppressHydrationWarning>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				<SessionProvider>
 					<ThemeProvider
-						attribute='class'
-						defaultTheme='system'
+						attribute="class"
+						defaultTheme="system"
 						enableSystem
 						disableTransitionOnChange
 					>
 						{children}
-						<Toaster position='top-center' />
+						<Toaster position="top-center" />
 					</ThemeProvider>
 				</SessionProvider>
 			</body>
