@@ -8,8 +8,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTransition } from 'react';
 
 interface PaginationControlsProps {
 	currentPage: number;
@@ -30,6 +31,7 @@ export default function PaginationControls({
 }: PaginationControlsProps) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
+	const [isPending, startTransition] = useTransition();
 
 	const createPageURL = (page: number, newLimit?: number) => {
 		const params = new URLSearchParams(searchParams);
@@ -41,7 +43,15 @@ export default function PaginationControls({
 	};
 
 	const handleLimitChange = (newLimit: string) => {
-		router.push(createPageURL(1, parseInt(newLimit)));
+		startTransition(() => {
+			router.push(createPageURL(1, parseInt(newLimit)));
+		});
+	};
+
+	const handlePageChange = (page: number) => {
+		startTransition(() => {
+			router.push(createPageURL(page));
+		});
 	};
 
 	const startItem = (currentPage - 1) * limit + 1;
@@ -109,10 +119,14 @@ export default function PaginationControls({
 				<Button
 					variant='outline'
 					size='sm'
-					onClick={() => router.push(createPageURL(currentPage - 1))}
-					disabled={!hasPrev}
+					onClick={() => handlePageChange(currentPage - 1)}
+					disabled={!hasPrev || isPending}
 				>
-					<ChevronLeft className='h-4 w-4' />
+					{isPending ? (
+						<Loader2 className='h-4 w-4 animate-spin' />
+					) : (
+						<ChevronLeft className='h-4 w-4' />
+					)}
 					Previous
 				</Button>
 
@@ -127,8 +141,9 @@ export default function PaginationControls({
 								<Button
 									variant={currentPage === page ? 'default' : 'outline'}
 									size='sm'
-									onClick={() => router.push(createPageURL(page as number))}
+									onClick={() => handlePageChange(page as number)}
 									className='min-w-[2.5rem]'
+									disabled={isPending}
 								>
 									{page}
 								</Button>
@@ -140,11 +155,15 @@ export default function PaginationControls({
 				<Button
 					variant='outline'
 					size='sm'
-					onClick={() => router.push(createPageURL(currentPage + 1))}
-					disabled={!hasNext}
+					onClick={() => handlePageChange(currentPage + 1)}
+					disabled={!hasNext || isPending}
 				>
 					Next
-					<ChevronRight className='h-4 w-4' />
+					{isPending ? (
+						<Loader2 className='h-4 w-4 animate-spin' />
+					) : (
+						<ChevronRight className='h-4 w-4' />
+					)}
 				</Button>
 			</div>
 		</div>

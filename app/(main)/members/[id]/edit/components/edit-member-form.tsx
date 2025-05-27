@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -97,6 +98,7 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 											<Input
 												placeholder='Enter first name'
 												{...field}
+												disabled={form.formState.isSubmitting}
 											/>
 										</FormControl>
 										<FormMessage />
@@ -113,6 +115,7 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 											<Input
 												placeholder='Enter last name'
 												{...field}
+												disabled={form.formState.isSubmitting}
 											/>
 										</FormControl>
 										<FormMessage />
@@ -130,6 +133,7 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 										<Input
 											type='date'
 											{...field}
+											disabled={form.formState.isSubmitting}
 										/>
 									</FormControl>
 									<FormMessage />
@@ -146,6 +150,7 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 										<Input
 											placeholder='Enter phone number'
 											{...field}
+											disabled={form.formState.isSubmitting}
 										/>
 									</FormControl>
 									<FormMessage />
@@ -158,6 +163,7 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 								variant='outline'
 								className='flex-1'
 								onClick={() => router.push(`/members/${member.id}`)}
+								disabled={form.formState.isSubmitting}
 							>
 								Cancel
 							</Button>
@@ -166,7 +172,14 @@ export default function EditMemberForm({ member }: EditMemberFormProps) {
 								className='flex-1'
 								disabled={form.formState.isSubmitting}
 							>
-								{form.formState.isSubmitting ? 'Updating...' : 'Update Member'}
+								{form.formState.isSubmitting ? (
+									<>
+										<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+										Updating...
+									</>
+								) : (
+									'Update Member'
+								)}
 							</Button>
 						</div>
 					</form>

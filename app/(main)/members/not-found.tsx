@@ -29,7 +29,7 @@ export default function MembersNotFound() {
 				<CardContent className='space-y-6'>
 					<div className='text-muted-foreground'>
 						<p className='text-lg mb-2'>
-							The page you're looking for doesn't exist.
+							The page you&apos;re looking for doesn&apos;t exist.
 						</p>
 						<p className='text-sm'>
 							It may have been moved, deleted, or you may have mistyped the URL.

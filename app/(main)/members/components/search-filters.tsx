@@ -1,9 +1,9 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { format } from 'date-fns';
-import { Search, X, Calendar as CalendarIcon, Filter } from 'lucide-react';
+import { Search, X, Calendar as CalendarIcon, Filter, Loader2 } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -21,6 +21,7 @@ interface SearchFiltersProps {
 export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
+	const [isPending, startTransition] = useTransition();
 
 	const [searchQuery, setSearchQuery] = useState(
 		searchParams.get('search') || '',
@@ -61,7 +62,9 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 			dateTo: dateTo ? format(dateTo, 'yyyy-MM-dd') : undefined,
 		};
 
-		router.push(createSearchURL(params));
+		startTransition(() => {
+			router.push(createSearchURL(params));
+		});
 	};
 
 	const handleClearFilters = () => {
@@ -75,7 +78,9 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 		newParams.delete('dateTo');
 		newParams.set('page', '1');
 
-		router.push(`?${newParams.toString()}`);
+		startTransition(() => {
+			router.push(`?${newParams.toString()}`);
+		});
 	};
 
 	const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -99,7 +104,13 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 							onChange={(e) => setSearchQuery(e.target.value)}
 							onKeyPress={handleKeyPress}
 							className='pl-10'
+							disabled={isPending}
 						/>
+						{isPending && (
+							<div className='absolute right-3 top-1/2 transform -translate-y-1/2'>
+								<Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
+							</div>
+						)}
 					</div>
 				</div>
 
@@ -110,6 +121,7 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 							<Button
 								variant='outline'
 								className='w-40 justify-start text-left font-normal'
+								disabled={isPending}
 							>
 								<CalendarIcon className='mr-2 h-4 w-4' />
 								{dateFrom ? format(dateFrom, 'MMM dd, yyyy') : 'From date'}
@@ -124,6 +136,7 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 								selected={dateFrom}
 								onSelect={setDateFrom}
 								initialFocus
+								disabled={isPending}
 							/>
 						</PopoverContent>
 					</Popover>
@@ -133,6 +146,7 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 							<Button
 								variant='outline'
 								className='w-40 justify-start text-left font-normal'
+								disabled={isPending}
 							>
 								<CalendarIcon className='mr-2 h-4 w-4' />
 								{dateTo ? format(dateTo, 'MMM dd, yyyy') : 'To date'}
@@ -147,6 +161,7 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 								selected={dateTo}
 								onSelect={setDateTo}
 								initialFocus
+								disabled={isPending}
 							/>
 						</PopoverContent>
 					</Popover>
@@ -157,8 +172,13 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 					<Button
 						onClick={handleSearch}
 						size='sm'
+						disabled={isPending}
 					>
-						<Filter className='mr-2 h-4 w-4' />
+						{isPending ? (
+							<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+						) : (
+							<Filter className='mr-2 h-4 w-4' />
+						)}
 						Apply
 					</Button>
 
@@ -167,8 +187,13 @@ export default function SearchFilters({ totalResults }: SearchFiltersProps) {
 							onClick={handleClearFilters}
 							variant='outline'
 							size='sm'
+							disabled={isPending}
 						>
-							<X className='mr-2 h-4 w-4' />
+							{isPending ? (
+								<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+							) : (
+								<X className='mr-2 h-4 w-4' />
+							)}
 							Clear
 						</Button>
 					)}

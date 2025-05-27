@@ -6,7 +6,8 @@ import { z } from 'zod';
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
+import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -31,6 +32,7 @@ import { newMemberSchema } from './schema';
 
 export default function NewMemberPage() {
 	const router = useRouter();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const form = useForm<z.infer<typeof newMemberSchema>>({
 		resolver: zodResolver(newMemberSchema),
 		defaultValues: {
@@ -42,13 +44,23 @@ export default function NewMemberPage() {
 	});
 
 	async function onSubmit(data: z.infer<typeof newMemberSchema>) {
-		const formData = new FormData();
-		Object.entries(data).forEach(([k, v]) => formData.append(k, v as string));
-		const result = await newMemberAction(null, formData);
-		if (result?.success) {
-			toast.success(result.message || 'Member created successfully!');
-			form.reset();
-			redirect('/members');
+		setIsSubmitting(true);
+		try {
+			const formData = new FormData();
+			Object.entries(data).forEach(([k, v]) => formData.append(k, v as string));
+			const result = await newMemberAction(null, formData);
+			if (result?.success) {
+				toast.success(result.message || 'Member created successfully!');
+				form.reset();
+				redirect('/members');
+			} else {
+				toast.error(result?.message || 'Failed to create member');
+			}
+		} catch (error) {
+			toast.error('An unexpected error occurred');
+			console.error('Error creating member:', error);
+		} finally {
+			setIsSubmitting(false);
 		}
 	}
 
@@ -98,6 +110,7 @@ export default function NewMemberPage() {
 												<Input
 													placeholder='Enter first name'
 													{...field}
+													disabled={isSubmitting}
 												/>
 											</FormControl>
 											<FormMessage />
@@ -114,6 +127,7 @@ export default function NewMemberPage() {
 												<Input
 													placeholder='Enter last name'
 													{...field}
+													disabled={isSubmitting}
 												/>
 											</FormControl>
 											<FormMessage />
@@ -131,6 +145,7 @@ export default function NewMemberPage() {
 											<Input
 												type='date'
 												{...field}
+												disabled={isSubmitting}
 											/>
 										</FormControl>
 										<FormMessage />
@@ -147,6 +162,7 @@ export default function NewMemberPage() {
 											<Input
 												placeholder='Enter phone number'
 												{...field}
+												disabled={isSubmitting}
 											/>
 										</FormControl>
 										<FormMessage />
@@ -159,14 +175,23 @@ export default function NewMemberPage() {
 									variant='outline'
 									className='flex-1'
 									onClick={() => router.push('/members')}
+									disabled={isSubmitting}
 								>
 									Cancel
 								</Button>
 								<Button
 									type='submit'
 									className='flex-1'
+									disabled={isSubmitting}
 								>
-									Create Member
+									{isSubmitting ? (
+										<>
+											<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+											Creating...
+										</>
+									) : (
+										'Create Member'
+									)}
 								</Button>
 							</div>
 						</form>
