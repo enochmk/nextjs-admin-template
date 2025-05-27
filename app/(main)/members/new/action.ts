@@ -1,11 +1,9 @@
+'use server';
+
 import { db } from '@/lib/db';
 import { members } from '@/lib/db/schema';
-import { redirect } from 'next/navigation';
 
-export const createMemberAction = async (
-	prevState: any,
-	formData: FormData,
-) => {
+export const newMemberAction = async (prevState: any, formData: FormData) => {
 	try {
 		const firstName = formData.get('firstName')?.toString() || '';
 		const lastName = formData.get('lastName')?.toString() || '';
@@ -16,8 +14,7 @@ export const createMemberAction = async (
 		if (!firstName || !lastName || !dateOfBirth || !phoneNumber) {
 			return {
 				success: false,
-				error: 'All fields are required',
-				message: null,
+				message: 'All fields are required',
 			};
 		}
 
@@ -29,14 +26,14 @@ export const createMemberAction = async (
 			phoneNumber,
 		});
 
-		// Redirect to members page on success
-		redirect('/members');
+		return {
+			success: true,
+			message: 'Member created successfully',
+		};
 	} catch (error) {
-		console.error('Error creating member:', error);
 		return {
 			success: false,
-			error: 'Failed to create member',
-			message: null,
+			message: 'Failed to create member',
 		};
 	}
 };

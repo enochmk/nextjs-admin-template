@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -20,27 +21,15 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
-import { createMemberAction } from './action';
+import { newMemberAction } from './action';
 import { toast } from 'sonner';
-
-const formSchema = z.object({
-	firstName: z.string().min(2, {
-		message: 'First name must be at least 2 characters.',
-	}),
-	lastName: z.string().min(2, {
-		message: 'Last name must be at least 2 characters.',
-	}),
-	dateOfBirth: z.string().min(1, {
-		message: 'Date of birth is required.',
-	}),
-	phoneNumber: z.string().min(10, {
-		message: 'Phone number must be at least 10 characters.',
-	}),
-});
+import { redirect } from 'next/navigation';
+import { newMemberSchema } from './schema';
 
 export default function NewMemberPage() {
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const router = useRouter();
+	const form = useForm<z.infer<typeof newMemberSchema>>({
+		resolver: zodResolver(newMemberSchema),
 		defaultValues: {
 			firstName: '',
 			lastName: '',
@@ -49,15 +38,14 @@ export default function NewMemberPage() {
 		},
 	});
 
-	async function onSubmit(data: z.infer<typeof formSchema>) {
+	async function onSubmit(data: z.infer<typeof newMemberSchema>) {
 		const formData = new FormData();
 		Object.entries(data).forEach(([k, v]) => formData.append(k, v as string));
-		const result = await createMemberAction(null, formData);
-		console.log({ result });
-
+		const result = await newMemberAction(null, formData);
 		if (result?.success) {
 			toast.success(result.message || 'Member created successfully!');
 			form.reset();
+			redirect('/members');
 		}
 	}
 
@@ -88,38 +76,40 @@ export default function NewMemberPage() {
 							onSubmit={form.handleSubmit(onSubmit)}
 							className='space-y-4'
 						>
-							<FormField
-								control={form.control}
-								name='firstName'
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>First Name</FormLabel>
-										<FormControl>
-											<Input
-												placeholder='Enter first name'
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name='lastName'
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Last Name</FormLabel>
-										<FormControl>
-											<Input
-												placeholder='Enter last name'
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
+							<div className='grid grid-cols-2 gap-4'>
+								<FormField
+									control={form.control}
+									name='firstName'
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>First Name</FormLabel>
+											<FormControl>
+												<Input
+													placeholder='Enter first name'
+													{...field}
+												/>
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name='lastName'
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Last Name</FormLabel>
+											<FormControl>
+												<Input
+													placeholder='Enter last name'
+													{...field}
+												/>
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</div>
 							<FormField
 								control={form.control}
 								name='dateOfBirth'
@@ -152,12 +142,22 @@ export default function NewMemberPage() {
 									</FormItem>
 								)}
 							/>
-							<Button
-								type='submit'
-								className='w-full'
-							>
-								Create Member
-							</Button>
+							<div className='flex gap-4'>
+								<Button
+									type='button'
+									variant='outline'
+									className='flex-1'
+									onClick={() => router.push('/members')}
+								>
+									Cancel
+								</Button>
+								<Button
+									type='submit'
+									className='flex-1'
+								>
+									Create Member
+								</Button>
+							</div>
 						</form>
 					</Form>
 				</CardContent>
