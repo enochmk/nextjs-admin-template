@@ -86,12 +86,7 @@ export function NavUser() {
 							</div>
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />
-						<DropdownMenuGroup>
-							{/* <DropdownMenuItem>
-								<IconUserCircle />
-								Account
-							</DropdownMenuItem> */}
-						</DropdownMenuGroup>
+						<DropdownMenuGroup>{/*  */}</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem onClick={handleSignOut}>
 							<IconLogout />
