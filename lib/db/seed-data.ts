@@ -78,3 +78,5 @@ export const membersData = [
 		phoneNumber: '+1 (555) 234-5679',
 	},
 ];
+
+export const usersData = [];
