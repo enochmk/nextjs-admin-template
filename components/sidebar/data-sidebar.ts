@@ -13,14 +13,14 @@ export const sidebarData = {
 			icon: IconDashboard,
 		},
 		{
-			title: 'Members',
-			url: '/members',
-			icon: IconUsers,
-		},
-		{
 			title: 'Users',
 			url: '/users',
 			icon: IconUserCog,
+		},
+		{
+			title: 'Members',
+			url: '/members',
+			icon: IconUsers,
 		},
 	],
 };
