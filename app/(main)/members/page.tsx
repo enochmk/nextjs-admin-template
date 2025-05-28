@@ -41,39 +41,43 @@ export default async function MembersPage({ searchParams }: MembersPageProps) {
 	});
 
 	return (
-		<div className="container mx-auto p-6">
-			<div className="mb-6 flex items-center justify-between">
-				<div>
-					<h1 className="text-2xl font-bold">Members</h1>
-					<p className="text-muted-foreground mt-1">
-						Manage your organization members
-					</p>
+		<div className="flex flex-1 flex-col">
+			<div className="@container/main flex flex-1 flex-col gap-2">
+				<div className="flex flex-col gap-4 px-4 py-4 md:gap-6 md:px-6 md:py-6">
+					<div className="flex items-center justify-between">
+						<div>
+							<h1 className="text-3xl font-bold tracking-tight">Members</h1>
+							<p className="text-muted-foreground">
+								Manage your organization members
+							</p>
+						</div>
+						<Link
+							href="/members/new"
+							className="bg-primary hover:bg-primary/90 text-primary-foreground inline-block rounded px-4 py-2 transition-colors"
+						>
+							<PlusIcon className="mr-1 inline h-4 w-4" />
+							Add Member
+						</Link>
+					</div>
+
+					<SearchFilters totalResults={result.pagination.total} />
+
+					<div className="bg-card rounded-lg border shadow-sm">
+						<MembersTable
+							membersList={result.data}
+							currentPage={result.pagination.page}
+							limit={result.pagination.limit}
+						/>
+						<PaginationControls
+							currentPage={result.pagination.page}
+							totalPages={result.pagination.totalPages}
+							hasNext={result.pagination.hasNext}
+							hasPrev={result.pagination.hasPrev}
+							total={result.pagination.total}
+							limit={result.pagination.limit}
+						/>
+					</div>
 				</div>
-				<Link
-					href="/members/new"
-					className="bg-primary hover:bg-primary/90 text-primary-foreground inline-block rounded px-4 py-2 transition-colors"
-				>
-					<PlusIcon className="mr-1 inline h-4 w-4" />
-					Add Member
-				</Link>
-			</div>
-
-			<SearchFilters totalResults={result.pagination.total} />
-
-			<div className="bg-card rounded-lg border shadow-sm">
-				<MembersTable
-					membersList={result.data}
-					currentPage={result.pagination.page}
-					limit={result.pagination.limit}
-				/>
-				<PaginationControls
-					currentPage={result.pagination.page}
-					totalPages={result.pagination.totalPages}
-					hasNext={result.pagination.hasNext}
-					hasPrev={result.pagination.hasPrev}
-					total={result.pagination.total}
-					limit={result.pagination.limit}
-				/>
 			</div>
 		</div>
 	);

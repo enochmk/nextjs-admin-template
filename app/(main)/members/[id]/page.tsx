@@ -36,16 +36,20 @@ export default async function MemberPage({ params }: MemberPageProps) {
 	const memberData = member[0];
 
 	return (
-		<div className="container mx-auto max-w-6xl p-6">
-			<MemberHeader memberData={memberData} />
-			<div className="grid gap-6 lg:grid-cols-3">
-				<div className="space-y-6 lg:col-span-2">
-					<PersonalInformationCard memberData={memberData} />
-					{/* <ActivityStatsCard memberData={memberData} /> */}
-				</div>
-				<div className="space-y-6">
-					<AccountOverviewCard memberData={memberData} />
-					<QuickActionsCard memberData={memberData} />
+		<div className="flex flex-1 flex-col">
+			<div className="@container/main flex flex-1 flex-col gap-2">
+				<div className="flex flex-col gap-4 px-4 py-4 md:gap-6 md:px-6 md:py-6">
+					<MemberHeader memberData={memberData} />
+					<div className="grid gap-6 lg:grid-cols-3">
+						<div className="space-y-6 lg:col-span-2">
+							<PersonalInformationCard memberData={memberData} />
+							{/* <ActivityStatsCard memberData={memberData} /> */}
+						</div>
+						<div className="space-y-6">
+							<AccountOverviewCard memberData={memberData} />
+							<QuickActionsCard memberData={memberData} />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

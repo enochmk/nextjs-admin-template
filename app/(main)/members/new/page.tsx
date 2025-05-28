@@ -60,132 +60,143 @@ export default function NewMemberPage() {
 	}
 
 	return (
-		<div className="container mx-auto max-w-4xl p-6">
-			{/* Breadcrumb Navigation */}
-			<div className="mb-6">
-				<Link
-					href="/members"
-					className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors"
-				>
-					<ArrowLeft className="mr-2 h-4 w-4" />
-					Back to Members
-				</Link>
-			</div>
-
-			{/* Page Header */}
-			<div className="mb-8">
-				<div className="flex items-center justify-between">
+		<div className="flex flex-1 flex-col">
+			<div className="@container/main flex flex-1 flex-col gap-2">
+				<div className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-4 py-4 md:gap-6 md:px-6 md:py-6">
+					{/* Breadcrumb Navigation */}
 					<div>
-						<h1 className="text-3xl font-bold tracking-tight">
-							Add New Member
-						</h1>
-						<p className="text-muted-foreground mt-2">
-							Create a new member by filling out the form below
-						</p>
+						<Link
+							href="/members"
+							className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors"
+						>
+							<ArrowLeft className="mr-2 h-4 w-4" />
+							Back to Members
+						</Link>
 					</div>
+
+					{/* Page Header */}
+					<div>
+						<div className="flex items-center justify-between">
+							<div>
+								<h1 className="text-3xl font-bold tracking-tight">
+									Add New Member
+								</h1>
+								<p className="text-muted-foreground mt-2">
+									Create a new member by filling out the form below
+								</p>
+							</div>
+						</div>
+					</div>
+
+					{/* Add Form */}
+					<Card>
+						<CardContent className="p-6">
+							<Form {...form}>
+								<form
+									onSubmit={form.handleSubmit(onSubmit)}
+									className="space-y-4"
+								>
+									<div className="grid grid-cols-2 gap-4">
+										<FormField
+											control={form.control}
+											name="firstName"
+											render={({ field }) => (
+												<FormItem>
+													<FormLabel>First Name</FormLabel>
+													<FormControl>
+														<Input
+															placeholder="Enter first name"
+															{...field}
+															disabled={isSubmitting}
+														/>
+													</FormControl>
+													<FormMessage />
+												</FormItem>
+											)}
+										/>
+										<FormField
+											control={form.control}
+											name="lastName"
+											render={({ field }) => (
+												<FormItem>
+													<FormLabel>Last Name</FormLabel>
+													<FormControl>
+														<Input
+															placeholder="Enter last name"
+															{...field}
+															disabled={isSubmitting}
+														/>
+													</FormControl>
+													<FormMessage />
+												</FormItem>
+											)}
+										/>
+									</div>
+									<FormField
+										control={form.control}
+										name="dateOfBirth"
+										render={({ field }) => (
+											<FormItem>
+												<FormLabel>Date of Birth</FormLabel>
+												<FormControl>
+													<Input
+														type="date"
+														{...field}
+														disabled={isSubmitting}
+													/>
+												</FormControl>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+									<FormField
+										control={form.control}
+										name="phoneNumber"
+										render={({ field }) => (
+											<FormItem>
+												<FormLabel>Phone Number</FormLabel>
+												<FormControl>
+													<Input
+														placeholder="Enter phone number"
+														{...field}
+														disabled={isSubmitting}
+													/>
+												</FormControl>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+									<div className="flex gap-4">
+										<Button
+											type="button"
+											variant="outline"
+											className="flex-1"
+											onClick={() => router.push('/members')}
+											disabled={isSubmitting}
+										>
+											Cancel
+										</Button>
+										<Button
+											type="submit"
+											className="flex-1"
+											disabled={isSubmitting}
+										>
+											{isSubmitting ? (
+												<>
+													<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+													Creating...
+												</>
+											) : (
+												'Create Member'
+											)}
+										</Button>
+									</div>
+								</form>
+							</Form>
+						</CardContent>
+					</Card>
 				</div>
 			</div>
-
-			{/* Add Form */}
-			<Card>
-				<CardContent className="p-6">
-					<Form {...form}>
-						<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-							<div className="grid grid-cols-2 gap-4">
-								<FormField
-									control={form.control}
-									name="firstName"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>First Name</FormLabel>
-											<FormControl>
-												<Input
-													placeholder="Enter first name"
-													{...field}
-													disabled={isSubmitting}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="lastName"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Last Name</FormLabel>
-											<FormControl>
-												<Input
-													placeholder="Enter last name"
-													{...field}
-													disabled={isSubmitting}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-							</div>
-							<FormField
-								control={form.control}
-								name="dateOfBirth"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Date of Birth</FormLabel>
-										<FormControl>
-											<Input type="date" {...field} disabled={isSubmitting} />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="phoneNumber"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Phone Number</FormLabel>
-										<FormControl>
-											<Input
-												placeholder="Enter phone number"
-												{...field}
-												disabled={isSubmitting}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<div className="flex gap-4">
-								<Button
-									type="button"
-									variant="outline"
-									className="flex-1"
-									onClick={() => router.push('/members')}
-									disabled={isSubmitting}
-								>
-									Cancel
-								</Button>
-								<Button
-									type="submit"
-									className="flex-1"
-									disabled={isSubmitting}
-								>
-									{isSubmitting ? (
-										<>
-											<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-											Creating...
-										</>
-									) : (
-										'Create Member'
-									)}
-								</Button>
-							</div>
-						</form>
-					</Form>
-				</CardContent>
-			</Card>
 		</div>
 	);
 }
