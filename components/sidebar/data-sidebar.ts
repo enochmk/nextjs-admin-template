@@ -1,4 +1,4 @@
-import { IconDashboard, IconUsers } from '@tabler/icons-react';
+import { IconDashboard, IconUsers, IconUserCog } from '@tabler/icons-react';
 
 export const sidebarData = {
 	user: {
@@ -16,6 +16,11 @@ export const sidebarData = {
 			title: 'Members',
 			url: '/members',
 			icon: IconUsers,
+		},
+		{
+			title: 'Users',
+			url: '/users',
+			icon: IconUserCog,
 		},
 	],
 };
