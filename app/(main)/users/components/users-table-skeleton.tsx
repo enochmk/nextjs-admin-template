@@ -14,7 +14,7 @@ interface UsersTableSkeletonProps {
 
 export function UsersTableSkeleton({ rows = 5 }: UsersTableSkeletonProps) {
 	return (
-		<div className="rounded-md border">
+		<div className="px-6">
 			<Table>
 				<TableHeader>
 					<TableRow>

@@ -30,44 +30,50 @@ async function UsersContent({ searchParams }: UsersPageProps) {
 		await getUsers(filters);
 
 	return (
-		<>
+		<div className="space-y-6">
 			<Suspense fallback={<UsersFilterssSkeleton />}>
 				<UsersFilters totalUsers={totalUsers} />
 			</Suspense>
 
-			<Suspense fallback={<UsersTableSkeleton />}>
-				<UsersTable
-					users={users}
-					currentPage={currentPage}
-					limit={filters.limit!}
-				/>
-			</Suspense>
+			<div className="bg-card rounded-lg border shadow-sm">
+				<Suspense fallback={<UsersTableSkeleton />}>
+					<UsersTable
+						users={users}
+						currentPage={currentPage}
+						limit={filters.limit!}
+					/>
+				</Suspense>
 
-			{totalPages > 1 && (
-				<PaginationControls
-					currentPage={currentPage}
-					totalPages={totalPages}
-					hasNext={currentPage < totalPages}
-					hasPrev={currentPage > 1}
-					total={totalUsers}
-					limit={filters.limit!}
-				/>
-			)}
-		</>
+				{totalPages > 1 && (
+					<PaginationControls
+						currentPage={currentPage}
+						totalPages={totalPages}
+						hasNext={currentPage < totalPages}
+						hasPrev={currentPage > 1}
+						total={totalUsers}
+						limit={filters.limit!}
+					/>
+				)}
+			</div>
+		</div>
 	);
 }
 
 export default async function UsersPage({ searchParams }: UsersPageProps) {
 	return (
-		<div className="space-y-6">
-			<div>
-				<h1 className="text-3xl font-bold tracking-tight">Users</h1>
-				<p className="text-muted-foreground">
-					Manage system users and their accounts.
-				</p>
-			</div>
+		<main className="flex flex-1 flex-col">
+			<div className="@container/main flex flex-1 flex-col gap-2">
+				<div className="flex flex-col gap-4 px-4 py-4 md:gap-6 md:px-6 md:py-6">
+					<div>
+						<h1 className="text-3xl font-bold tracking-tight">Users</h1>
+						<p className="text-muted-foreground">
+							Manage system users and their accounts.
+						</p>
+					</div>
 
-			<UsersContent searchParams={searchParams} />
-		</div>
+					<UsersContent searchParams={searchParams} />
+				</div>
+			</div>
+		</main>
 	);
 }

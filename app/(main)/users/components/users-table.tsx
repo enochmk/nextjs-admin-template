@@ -76,7 +76,7 @@ export function UsersTable({ users, currentPage, limit }: UsersTableProps) {
 
 	return (
 		<>
-			<div className="rounded-md border">
+			<div className="px-6">
 				<Table>
 					<TableHeader>
 						<TableRow>
